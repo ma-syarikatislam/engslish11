@@ -1,32 +1,53 @@
 <!DOCTYPE html>
 <html lang="en" translate="no">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="google" content="notranslate" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google" content="notranslate">
   <title>Latihan Soal Bahasa Inggris</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      padding: 20px;
+      padding: 15px;
       user-select: none;
       -webkit-user-select: none;
+      background: #f5f5f5;
+      color: #333;
+      max-width: 700px;
+      margin: auto;
     }
     h2 {
       text-align: center;
+      font-size: 1.5em;
     }
     .soal {
-      margin-bottom: 20px;
+      background: white;
+      border-radius: 10px;
+      padding: 15px;
+      margin: 10px 0;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
     }
     .options {
-      margin-left: 20px;
+      margin-left: 10px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 0.95em;
     }
     button {
       display: block;
       margin: 30px auto;
-      padding: 10px 20px;
+      padding: 10px 25px;
       font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background-color: #4CAF50;
+      color: white;
       cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
     }
   </style>
 </head>
@@ -38,12 +59,11 @@
     <button type="submit">Kumpulkan Jawaban</button>
   </form>
 
-  <!-- Confetti library -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
   <script>
-    document.addEventListener('keydown', function(e) {
-      if (e.ctrlKey && ['c', 'v', 'x'].includes(e.key.toLowerCase())) {
+    document.addEventListener("keydown", function (e) {
+      if (e.ctrlKey && ["c", "v", "x"].includes(e.key.toLowerCase())) {
         e.preventDefault();
       }
     });
@@ -70,8 +90,8 @@
       ["When writing a diary, it is common to write the:", ["Time and date", "Weather forecast", "Newspaper headline", "Television schedule", "Advertisement"], "A"],
       ["What is the role of an MC?", ["To cook meals", "To host an event", "To sing on stage", "To decorate a room", "To write a book"], "B"],
       ["An MC usually starts an event by:", ["Sleeping", "Saying goodbye", "Giving the opening speech", "Dancing", "Cleaning the stage"], "C"],
-      ["Which expression is suitable for opening a formal event?", ["“Hey guys, what’s up?”", "“Hi there!”", "“Ladies and gentlemen, welcome to the event.”", "“Yo, what’s going on?”", "“Okay, let’s go!”"], "C"],
-      ["When you are annoyed, you might say:", ["“This is so exciting!”", "“I can’t believe this happened again!”", "“Thank you very much!”", "“I feel happy today.”", "“This is amazing!”"], "B"],
+      ["Which expression is suitable for opening a formal event?", ["\"Hey guys, what’s up?\"", "\"Hi there!\"", "\"Ladies and gentlemen, welcome to the event.\"", "\"Yo, what’s going on?\"", "\"Okay, let’s go!\""], "C"],
+      ["When you are annoyed, you might say:", ["\"This is so exciting!\"", "\"I can’t believe this happened again!\"", "\"Thank you very much!\"", "\"I feel happy today.\"", "\"This is amazing!\""], "B"],
       ["You forgot your lines on stage. How do you feel?", ["Embarrassed", "Angry", "Annoyed", "Excited", "Satisfied"], "A"],
       ["Your little brother broke your phone. What do you feel?", ["Angry", "Proud", "Excited", "Embarrassed", "Relaxed"], "A"]
     ];
@@ -91,7 +111,7 @@
           <label>
             <input type="radio" name="q${index}" value="${String.fromCharCode(65 + i)}" id="${id}" />
             ${String.fromCharCode(65 + i)}. ${opt}
-          </label><br/>
+          </label>
         `;
         optionsDiv.innerHTML += radio;
       });
@@ -121,13 +141,17 @@
         }
       }
 
+      // Skor per soal 4 poin
+      const finalScore = score * 4;
+
+      // Confetti effect
       confetti({
         particleCount: 150,
         spread: 100,
         origin: { y: 0.6 }
       });
 
-      alert("Skor kamu: " + score + " dari " + total + " soal!");
+      alert("Skor kamu: " + finalScore + "!");
     });
   </script>
 </body>
