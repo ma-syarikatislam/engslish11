@@ -9,12 +9,12 @@
     body {
       font-family: Arial, sans-serif;
       padding: 15px;
-      user-select: none;
-      -webkit-user-select: none;
       background: #f5f5f5;
       color: #333;
       max-width: 700px;
       margin: auto;
+      user-select: none;
+      -webkit-user-select: none;
     }
     h2 {
       text-align: center;
@@ -49,6 +49,20 @@
     button:hover {
       background-color: #45a049;
     }
+    #score-popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 50px;
+      color: green;
+      background: white;
+      border-radius: 20px;
+      padding: 30px 60px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      z-index: 9999;
+    }
   </style>
 </head>
 <body oncontextmenu="return false" oncopy="return false" oncut="return false" onpaste="return false">
@@ -58,6 +72,8 @@
     <div id="questions"></div>
     <button type="submit">Kumpulkan Jawaban</button>
   </form>
+
+  <div id="score-popup"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
@@ -82,16 +98,16 @@
       ["She ___ the door before leaving.", ["closes", "closed", "close", "closing", "is close"], "B"],
       ["They ___ football every Sunday.", ["play", "played", "playing", "plays", "is playing"], "A"],
       ["My father ___ a new car last month.", ["buy", "buys", "bought", "buying", "is buy"], "C"],
-      ["A: \"I passed the exam!\" B: \"___!\"", ["How boring", "I’m disappointed", "That’s great", "I don’t like it", "It’s terrible"], "C"],
-      ["A: \"We won the match!\" B: \"___\"", ["I’m very pleased", "That’s too bad", "I’m angry", "It’s awful", "I feel embarrassed"], "A"],
+      ["A: 'I passed the exam!' B: '___!'", ["How boring", "I’m disappointed", "That’s great", "I don’t like it", "It’s terrible"], "C"],
+      ["A: 'We won the match!' B: '___'", ["I’m very pleased", "That’s too bad", "I’m angry", "It’s awful", "I feel embarrassed"], "A"],
       ["I feel ___ with the result of my hard work.", ["satisfied", "angry", "annoyed", "bored", "embarrassed"], "A"],
       ["A diary is usually written in the ___ person.", ["third", "second", "first", "fourth", "passive"], "C"],
       ["Which sentence is suitable for a diary?", ["He is playing football now.", "I felt happy today because I met my old friend.", "She went to the market yesterday.", "They are good students.", "This is a dictionary."], "B"],
       ["When writing a diary, it is common to write the:", ["Time and date", "Weather forecast", "Newspaper headline", "Television schedule", "Advertisement"], "A"],
       ["What is the role of an MC?", ["To cook meals", "To host an event", "To sing on stage", "To decorate a room", "To write a book"], "B"],
       ["An MC usually starts an event by:", ["Sleeping", "Saying goodbye", "Giving the opening speech", "Dancing", "Cleaning the stage"], "C"],
-      ["Which expression is suitable for opening a formal event?", ["\"Hey guys, what’s up?\"", "\"Hi there!\"", "\"Ladies and gentlemen, welcome to the event.\"", "\"Yo, what’s going on?\"", "\"Okay, let’s go!\""], "C"],
-      ["When you are annoyed, you might say:", ["\"This is so exciting!\"", "\"I can’t believe this happened again!\"", "\"Thank you very much!\"", "\"I feel happy today.\"", "\"This is amazing!\""], "B"],
+      ["Which expression is suitable for opening a formal event?", ["'Hey guys, what’s up?'", "'Hi there!'", "'Ladies and gentlemen, welcome to the event.'", "'Yo, what’s going on?'", "'Okay, let’s go!'"], "C"],
+      ["When you are annoyed, you might say:", ["'This is so exciting!'", "'I can’t believe this happened again!'", "'Thank you very much!'", "'I feel happy today.'", "'This is amazing!'"], "B"],
       ["You forgot your lines on stage. How do you feel?", ["Embarrassed", "Angry", "Annoyed", "Excited", "Satisfied"], "A"],
       ["Your little brother broke your phone. What do you feel?", ["Angry", "Proud", "Excited", "Embarrassed", "Relaxed"], "A"]
     ];
@@ -122,7 +138,7 @@
     document.getElementById("quizForm").addEventListener("submit", function (e) {
       e.preventDefault();
       let score = 0;
-      let total = soalData.length;
+      const total = soalData.length;
 
       for (let i = 0; i < total; i++) {
         const radios = document.getElementsByName("q" + i);
@@ -141,17 +157,16 @@
         }
       }
 
-      // Skor per soal 4 poin
       const finalScore = score * 4;
+      const scorePopup = document.getElementById("score-popup");
+      scorePopup.textContent = finalScore;
+      scorePopup.style.display = "block";
 
-      // Confetti effect
       confetti({
-        particleCount: 150,
-        spread: 100,
+        particleCount: 200,
+        spread: 90,
         origin: { y: 0.6 }
       });
-
-      alert("Skor kamu: " + finalScore + "!");
     });
   </script>
 </body>
